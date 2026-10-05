@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>0MAAKAAN0 // ROAD TO SPACE</title>
+<style>
+:root{
+ --bg:#02050b; --panel:rgba(7,15,30,.78); --line:rgba(77,174,255,.25);
+ --blue:#20a7ff; --cyan:#6de8ff; --white:#eaf7ff; --muted:#7c9ab2;
+ --good:#49ffb0; --danger:#ff4d73; --gold:#ffd65a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Tahoma,sans-serif;background:#02050b;color:var(--white);overflow-x:hidden}
+body{
+ background:
+ radial-gradient(circle at 50% -10%,rgba(0,151,255,.26),transparent 36%),
+ radial-gradient(circle at 15% 80%,rgba(0,72,160,.18),transparent 35%),
+ #02050b;
+}
+#stars,#fx{position:fixed;inset:0;pointer-events:none;z-index:0}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.5;animation:twinkle 2s infinite alternate}
+@keyframes twinkle{to{opacity:.08;transform:scale(.35)}}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(2,5,11,.72);border-bottom:1px solid var(--line)}
+.top{max-width:1450px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:1000;letter-spacing:2px;font-size:19px}
+.brand span{color:var(--cyan)}
+.controls{display:flex;gap:8px}
+button{font:inherit}
+.iconBtn{border:1px solid var(--line);background:rgba(10,24,43,.8);color:var(--white);border-radius:12px;padding:9px 12px;cursor:pointer;transition:.2s}
+.iconBtn:hover{transform:translateY(-2px);border-color:var(--cyan);box-shadow:0 0 20px rgba(32,167,255,.2)}
+.wrap{position:relative;z-index:2;max-width:1450px;margin:auto;padding:22px 20px 50px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}
+.panel{background:linear-gradient(180deg,rgba(9,21,40,.82),rgba(4,10,20,.88));border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 70px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.04);overflow:hidden}
+.stats{padding:24px}
+.kicker{color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:3px}
+.money{font-size:clamp(38px,6vw,76px);font-weight:1000;line-height:1;margin:8px 0;text-shadow:0 0 35px rgba(32,167,255,.35)}
+.money small{font-size:.3em;color:var(--muted);font-weight:800}
+.sub{color:var(--muted);font-size:14px}
+.progress{height:13px;background:#07111f;border-radius:99px;overflow:hidden;margin:18px 0 10px;border:1px solid #10273e}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#087cff,#5ce9ff,#fff);box-shadow:0 0 25px #20a7ff;transition:width .35s}
+.row{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px}
+.clickZone{min-height:330px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.clickZone:before{content:"";position:absolute;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle,rgba(32,167,255,.23),transparent 65%);animation:pulse 2.2s infinite}
+@keyframes pulse{50%{transform:scale(1.25);opacity:.55}}
+.coin{position:relative;width:215px;height:215px;border-radius:50%;border:5px solid #9eefff;background:radial-gradient(circle at 34% 28%,#dffcff 0 3%,#4bdcff 14%,#087cff 48%,#042f76 100%);box-shadow:0 0 35px #0ea5ff,0 0 100px rgba(0,132,255,.45),inset 0 0 30px rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:105px;font-weight:1000;color:#03142d;cursor:pointer;user-select:none;touch-action:manipulation;transition:transform .08s}
+.coin:after{content:"";position:absolute;inset:13px;border-radius:50%;border:1px solid rgba(255,255,255,.5)}
+.coin:active,.coin.hit{transform:scale(.91) rotate(-2deg)}
+.coin .ring{position:absolute;inset:-24px;border:1px solid rgba(91,226,255,.5);border-radius:50%;animation:spin 7s linear infinite}
+.coin .ring2{position:absolute;inset:-45px;border:1px dashed rgba(91,226,255,.2);border-radius:50%;animation:spin 12s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.clickHint{position:absolute;bottom:15px;color:#78a5c1;font-size:12px}
+.float{position:fixed;z-index:100;font-weight:1000;color:#dffcff;text-shadow:0 0 15px #20a7ff;pointer-events:none;animation:floatup 850ms ease-out forwards}
+@keyframes floatup{to{transform:translateY(-90px) scale(1.15);opacity:0}}
+.gridTitle{display:flex;justify-content:space-between;align-items:end;margin:28px 0 12px}
+.gridTitle h2{margin:0;font-size:22px}
+.gridTitle p{margin:0;color:var(--muted);font-size:12px}
+.upgrades{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{position:relative;padding:15px;border:1px solid rgba(58,143,206,.23);background:rgba(5,13,25,.78);border-radius:18px;min-height:155px;transition:.22s;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(32,167,255,.09),transparent 40%);opacity:0;transition:.2s}
+.card:hover{transform:translateY(-5px);border-color:rgba(109,232,255,.6);box-shadow:0 15px 35px rgba(0,0,0,.35),0 0 30px rgba(32,167,255,.08)}
+.card:hover:before{opacity:1}
+.card.buyable{border-color:rgba(73,255,176,.28)}
+.card.maxed{opacity:.7}
+.cardTop{display:flex;justify-content:space-between;gap:10px}
+.ico{font-size:28px}
+.lv{font-size:10px;color:#5c7f98}
+.card h3{font-size:14px;margin:8px 0 5px}
+.gain{color:var(--good);font-size:12px;font-weight:900}
+.cost{color:#a9bfd0;font-size:12px;margin-top:8px}
+.buy{margin-top:10px;width:100%;padding:9px;border:0;border-radius:10px;background:linear-gradient(90deg,#087cff,#16b9ff);color:white;font-weight:1000;cursor:pointer;box-shadow:0 7px 20px rgba(0,124,255,.18);transition:.16s}
+.buy:disabled{cursor:not-allowed;background:#102234;color:#536b7c;box-shadow:none}
+.buy:not(:disabled):hover{transform:scale(1.02);filter:brightness(1.15)}
+.buy:active{transform:scale(.97)}
+#toast{position:fixed;top:82px;left:50%;transform:translateX(-50%) translateY(-20px);opacity:0;z-index:200;padding:11px 17px;border:1px solid rgba(109,232,255,.4);background:rgba(2,10,20,.92);border-radius:12px;box-shadow:0 10px 35px #000;color:#dffcff;transition:.25s;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modalBox{width:min(900px,100%);max-height:85vh;overflow:auto;background:#06101e;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 30px 100px #000}
+.modalHead{display:flex;justify-content:space-between;align-items:center}
+.ends{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.end{padding:18px;border-radius:16px;border:1px solid #142b42;background:#071322;text-align:center}
+.end .q{font-size:28px;font-weight:1000;color:#50738c}
+.end.unlocked{border-color:rgba(255,214,90,.5);box-shadow:0 0 25px rgba(255,214,90,.08)}
+.end.unlocked .q{color:var(--gold)}
+.hints{margin-top:16px;color:#7693a8;font-size:12px;line-height:2}
+.notice{margin-top:18px;padding:12px;border-radius:13px;background:rgba(73,255,176,.05);border:1px solid rgba(73,255,176,.14);color:#86bca6;font-size:12px}
+footer{text-align:center;color:#36546a;font-size:10px;margin-top:35px;letter-spacing:2px}
+.shake{animation:shake .25s}
+@keyframes shake{25%{transform:translateX(3px)}50%{transform:translateX(-3px)}75%{transform:translateX(2px)}}
+@media(max-width:1050px){.upgrades{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.upgrades{grid-template-columns:repeat(2,1fr)}.coin{width:180px;height:180px;font-size:88px}.clickZone{min-height:300px}.ends{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.wrap{padding:14px 10px 40px}.stats{padding:18px}.upgrades{grid-template-columns:1fr 1fr;gap:8px}.card{padding:11px;min-height:150px}.money{font-size:42px}.brand{font-size:14px}.top{padding:11px 12px}.coin{width:155px;height:155px;font-size:72px}.ends{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="stars"></div><canvas id="fx"></canvas><div id="toast"></div>
+
+<header><div class="top">
+  <div class="brand">0MAAKAAN0 <span>// ROAD TO SPACE</span></div>
+  <div class="controls">
+    <button class="iconBtn" id="soundBtn">🔊 صدا</button>
+    <button class="iconBtn" id="endsBtn">🏁 پایان‌ها</button>
+    <button class="iconBtn" id="resetBtn">↻ ریست</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+  <div class="panel stats">
+    <div class="kicker">MISSION // ONE BILLION</div>
+    <div class="money" id="money">$0 <small>/ $1B</small></div>
+    <div class="sub">هر کلیک تو را یک قدم به فضا نزدیک‌تر می‌کند.</div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="row"><span id="pct">0%</span><span id="power">قدرت کلیک: +$1</span></div>
+    <div class="notice">💡 بعضی رازها با پول خریدنی نیستند...</div>
+  </div>
+  <div class="panel clickZone" id="zone">
+    <div class="coin" id="coin"><div class="ring"></div><div class="ring2"></div>$</div>
+    <div class="clickHint">برای پول ساختن کلیک کن • لمس روی موبایل هم کار می‌کند</div>
+  </div>
+</section>
+
+<div class="gridTitle"><div><h2>⚙️ بازار ارتقاها</h2><p>100 ارتقا — هر کدام قدرت منحصربه‌فرد</p></div><div id="owned">0 / 100</div></div>
+<section class="upgrades" id="upgrades"></section>
+<footer>MADE FOR THE JOURNEY TO SPACE • 0MAAKAAN0 // SPACE</footer>
+</main>
+
+<div class="modal" id="modal"><div class="modalBox">
+ <div class="modalHead"><h2>🏁 12 پایان مخفی</h2><button class="iconBtn" id="closeModal">✕</button></div>
+ <p style="color:#718fa4;font-size:12px">فعلاً چیزی لو نمی‌دهم. بعضی پایان‌ها حتی به پول مربوط نیستند.</p>
+ <div class="ends" id="ends"></div>
+ <div class="hints">
+  • «گاهی سریع‌ترین راه، پولدار شدن نیست...»<br>
+  • «همه‌چیز با کلیک کردن به دست نمی‌آید.»<br>
+  • «بعضی چیزها وقتی زیاد پیشرفت کنی، خودشان ظاهر می‌شوند.»<br>
+  • «به چیزهایی که معمولاً نادیده می‌گیری دقت کن.»<br>
+  • «یک میلیارد فقط یک عدد نیست.»
+ </div>
+</div></div>
+
+<script>
+const TARGET=1000000000;
+const UPGRADES=[{"name": "جرقه اول", "icon": "⚡", "cost": 35, "gain": 2}, {"name": "موتور جیبی", "icon": "🔧", "cost": 41, "gain": 4}, {"name": "ربات جمع‌آور", "icon": "🤖", "cost": 48, "gain": 8}, {"name": "چاپگر پول", "icon": "🖨️", "cost": 57, "gain": 15}, {"name": "استارت‌آپ", "icon": "🚀", "cost": 67, "gain": 26}, {"name": "توربو کلیک", "icon": "🔥", "cost": 80, "gain": 42}, {"name": "مزرعه انرژی", "icon": "☀️", "cost": 94, "gain": 63}, {"name": "ماینر ماه", "icon": "🌙", "cost": 111, "gain": 90}, {"name": "آرشیو طلا", "icon": "💎", "cost": 131, "gain": 125}, {"name": "بانک دیجیتال", "icon": "🏦", "cost": 155, "gain": 168}, {"name": "ربات کارگر", "icon": "🦾", "cost": 183, "gain": 220}, {"name": "کارخانه نانو", "icon": "🏭", "cost": 216, "gain": 281}, {"name": "موتور کوانتومی", "icon": "⚛️", "cost": 255, "gain": 353}, {"name": "شبکه ماهواره‌ای", "icon": "🛰️", "cost": 300, "gain": 436}, {"name": "بورس فضایی", "icon": "📈", "cost": 355, "gain": 531}, {"name": "سپر انرژی", "icon": "🛡️", "cost": 419, "gain": 640}, {"name": "هلیوم‌۳", "icon": "🪐", "cost": 494, "gain": 762}, {"name": "ناو باربری", "icon": "🚚", "cost": 583, "gain": 899}, {"name": "آکادمی ثروت", "icon": "🎓", "cost": 688, "gain": 1052}, {"name": "مغز مصنوعی", "icon": "🧠", "cost": 812, "gain": 1221}, {"name": "مزرعه خورشیدی", "icon": "⚡", "cost": 958, "gain": 1408}, {"name": "تونل فضایی", "icon": "🔧", "cost": 1131, "gain": 1613}, {"name": "آهنربای ستاره‌ای", "icon": "🤖", "cost": 1334, "gain": 1837}, {"name": "موتور پلاسما", "icon": "🖨️", "cost": 1575, "gain": 2080}, {"name": "ایستگاه مدار", "icon": "🚀", "cost": 1858, "gain": 2344}, {"name": "ابررایانه", "icon": "🔥", "cost": 2193, "gain": 2630}, {"name": "راکتور کوچک", "icon": "☀️", "cost": 2588, "gain": 2938}, {"name": "شهر شناور", "icon": "🌙", "cost": 3054, "gain": 3269}, {"name": "شبکه کرم‌چاله", "icon": "💎", "cost": 3603, "gain": 3624}, {"name": "استخراج سیارکی", "icon": "🏦", "cost": 4252, "gain": 4004}, {"name": "بانک مریخ", "icon": "🦾", "cost": 5017, "gain": 4410}, {"name": "کارخانه رباتیک", "icon": "🏭", "cost": 5921, "gain": 4842}, {"name": "دکل لیزری", "icon": "⚛️", "cost": 6987, "gain": 5301}, {"name": "موتور ضدگرانش", "icon": "🛰️", "cost": 8244, "gain": 5789}, {"name": "بازار بین‌سیاره‌ای", "icon": "📈", "cost": 9728, "gain": 6306}, {"name": "بندر ماه", "icon": "🛡️", "cost": 11479, "gain": 6853}, {"name": "ناوگان تجاری", "icon": "🪐", "cost": 13546, "gain": 7430}, {"name": "هوش کیهانی", "icon": "🚚", "cost": 15984, "gain": 8039}, {"name": "مزرعه ستاره‌ای", "icon": "🎓", "cost": 18861, "gain": 8680}, {"name": "شبکه زمان", "icon": "🧠", "cost": 22256, "gain": 9354}, {"name": "ماشین ماده", "icon": "⚡", "cost": 26263, "gain": 10063}, {"name": "کارخانه سیاره‌ای", "icon": "🔧", "cost": 30990, "gain": 10806}, {"name": "سازنده ماه", "icon": "🤖", "cost": 36568, "gain": 11585}, {"name": "راکتور خورشیدی", "icon": "🖨️", "cost": 43151, "gain": 12401}, {"name": "دستگاه خلأ", "icon": "🚀", "cost": 50918, "gain": 13254}, {"name": "دروازه آبی", "icon": "🔥", "cost": 60083, "gain": 14146}, {"name": "ابرشبکه", "icon": "☀️", "cost": 70899, "gain": 15077}, {"name": "شهر مریخی", "icon": "🌙", "cost": 83660, "gain": 16048}, {"name": "ناو مادر", "icon": "💎", "cost": 98719, "gain": 17059}, {"name": "امپراتوری مالی", "icon": "🏦", "cost": 116489, "gain": 18112}, {"name": "موتور صفر", "icon": "🦾", "cost": 137457, "gain": 19208}, {"name": "هسته ستاره", "icon": "🏭", "cost": 162199, "gain": 20347}, {"name": "بانک کهکشانی", "icon": "⚛️", "cost": 191395, "gain": 21530}, {"name": "پل فضازمان", "icon": "🛰️", "cost": 225847, "gain": 22758}, {"name": "کارخانه سیارک", "icon": "📈", "cost": 266499, "gain": 24032}, {"name": "سازنده مدار", "icon": "🛡️", "cost": 314469, "gain": 25353}, {"name": "مزرعه نوترونی", "icon": "🪐", "cost": 371073, "gain": 26721}, {"name": "هوش بی‌نهایت", "icon": "🚚", "cost": 437867, "gain": 28137}, {"name": "شهر حلقه‌ای", "icon": "🎓", "cost": 516683, "gain": 29603}, {"name": "راکتور کهکشانی", "icon": "🧠", "cost": 609686, "gain": 31119}, {"name": "بازار سیاه‌چاله", "icon": "⚡", "cost": 719429, "gain": 32686}, {"name": "موتور فراتر", "icon": "🔧", "cost": 848927, "gain": 34304}, {"name": "شبکه ابدیت", "icon": "🤖", "cost": 1001734, "gain": 35975}, {"name": "سازنده ستاره", "icon": "🖨️", "cost": 1182046, "gain": 37699}, {"name": "بانک زمان", "icon": "🚀", "cost": 1394814, "gain": 39477}, {"name": "پرتال کیهانی", "icon": "🔥", "cost": 1645881, "gain": 41311}, {"name": "ماشین احتمال", "icon": "☀️", "cost": 1942139, "gain": 43200}, {"name": "هسته کهکشان", "icon": "🌙", "cost": 2291725, "gain": 45146}, {"name": "اتحاد سیارات", "icon": "💎", "cost": 2704235, "gain": 47150}, {"name": "سلطنت مدار", "icon": "🏦", "cost": 3190998, "gain": 49212}, {"name": "کارخانه جهان", "icon": "🦾", "cost": 3765377, "gain": 51334}, {"name": "موتور چندجهانی", "icon": "🏭", "cost": 4443145, "gain": 53516}, {"name": "بانک چندجهانی", "icon": "⚛️", "cost": 5242912, "gain": 55759}, {"name": "هوش چندبعدی", "icon": "🛰️", "cost": 6186636, "gain": 58063}, {"name": "دروازه واقعیت", "icon": "📈", "cost": 7300230, "gain": 60430}, {"name": "سازنده جهان", "icon": "🛡️", "cost": 8614272, "gain": 62861}, {"name": "راکتور بی‌نهایت", "icon": "🪐", "cost": 10164841, "gain": 65356}, {"name": "بازار بی‌نهایت", "icon": "🚚", "cost": 11994512, "gain": 67916}, {"name": "شبکه خالق", "icon": "🎓", "cost": 14153524, "gain": 70542}, {"name": "موتور خالق", "icon": "🧠", "cost": 16701159, "gain": 73235}, {"name": "هسته واقعیت", "icon": "⚡", "cost": 19707368, "gain": 75996}, {"name": "امپراتوری نور", "icon": "🔧", "cost": 23254694, "gain": 78825}, {"name": "پرتال آخر", "icon": "🤖", "cost": 27440539, "gain": 81723}, {"name": "ماشین آرزو", "icon": "🖨️", "cost": 32379836, "gain": 84692}, {"name": "بانک ابدیت", "icon": "🚀", "cost": 38208207, "gain": 87732}, {"name": "شهر خالق", "icon": "🔥", "cost": 45085684, "gain": 90844}, {"name": "شبکه آسمانی", "icon": "☀️", "cost": 53201107, "gain": 94028}, {"name": "راکتور نهایی", "icon": "🌙", "cost": 62777306, "gain": 97286}, {"name": "موتور نهایی", "icon": "💎", "cost": 74077221, "gain": 100618}, {"name": "کلید جهان", "icon": "🏦", "cost": 87411121, "gain": 104025}, {"name": "قفل زمان", "icon": "🦾", "cost": 103145123, "gain": 107509}, {"name": "منبع بی‌نهایت", "icon": "🏭", "cost": 121711246, "gain": 111069}, {"name": "هسته بی‌نهایت", "icon": "⚛️", "cost": 143619270, "gain": 114707}, {"name": "دروازه آخر", "icon": "🛰️", "cost": 169470739, "gain": 118424}, {"name": "فراتر از پول", "icon": "📈", "cost": 199975472, "gain": 122220}, {"name": "پولِ جهان", "icon": "🛡️", "cost": 235971057, "gain": 126097}, {"name": "قلب کیهان", "icon": "🪐", "cost": 278445847, "gain": 130055}, {"name": "دکمه نهایی", "icon": "🚚", "cost": 328566100, "gain": 134095}, {"name": "آخرین ارتقا", "icon": "🎓", "cost": 387707998, "gain": 138217}, {"name": "راه فضا", "icon": "🧠", "cost": 457495437, "gain": 142423}];
+let state=JSON.parse(localStorage.getItem("spaceUltraSave")||"null")||{
+ money:0,power:1,owned:Array(100).fill(0),clicks:0,bought:0,sound:true,unlocked:Array(12).fill(false),secret:0
+};
+if(!Array.isArray(state.owned)||state.owned.length!==100) state.owned=Array(100).fill(0);
+if(!Array.isArray(state.unlocked)||state.unlocked.length!==12) state.unlocked=Array(12).fill(false);
+
+const moneyEl=document.getElementById("money"), bar=document.getElementById("bar"), pct=document.getElementById("pct");
+const powerEl=document.getElementById("power"), upgradesEl=document.getElementById("upgrades"), ownedEl=document.getElementById("owned");
+const coin=document.getElementById("coin"), zone=document.getElementById("zone"), toast=document.getElementById("toast");
+const soundBtn=document.getElementById("soundBtn"), modal=document.getElementById("modal"), endsEl=document.getElementById("ends");
+let audioCtx=null;
+
+function save(){localStorage.setItem("spaceUltraSave",JSON.stringify(state))}
+function fmt(n){
+ if(n<1000) return Math.floor(n).toLocaleString();
+ const units=["K","M","B","T","Qa","Qi","Sx","Sp"];
+ let i=0; while(n>=1000&&i<units.length-1){n/=1000;i++}
+ return n>=100? n.toFixed(0)+units[i] : n>=10?n.toFixed(1)+units[i]:n.toFixed(2)+units[i];
+}
+function beep(freq=440,dur=.06,type="sine",gain=.035){
+ if(!state.sound)return;
+ try{
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+dur);
+  o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur);
+ }catch(e){}
+}
+function toastMsg(t){toast.textContent=t;toast.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>toast.classList.remove("show"),1300)}
+function particle(x,y){
+ const p=document.createElement("div");p.className="float";p.textContent="+"+fmt(state.power);
+ p.style.left=(x-15)+"px";p.style.top=(y-20)+"px";document.body.appendChild(p);setTimeout(()=>p.remove(),900);
+}
+function burst(x,y,big=false){
+ const c=document.getElementById("fx"),ctx=c.getContext("2d"),d=devicePixelRatio||1;
+ c.width=innerWidth*d;c.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);
+ const arr=[];for(let i=0;i<(big?100:24);i++){const a=Math.random()*Math.PI*2,s=(big?3:1)+Math.random()*(big?9:5);arr.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:1+Math.random()*3,life:1})}
+ let last=performance.now();
+ function draw(now){const dt=(now-last)/16;last=now;ctx.clearRect(0,0,innerWidth,innerHeight);
+  let alive=false;for(const q of arr){if(q.life<=0)continue;alive=true;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=.12*dt;q.life-=.025*dt;ctx.globalAlpha=q.life;ctx.fillStyle="#5ce9ff";ctx.beginPath();ctx.arc(q.x,q.y,q.r,0,7);ctx.fill()}
+  ctx.globalAlpha=1;if(alive)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height)
+ }requestAnimationFrame(draw)
+}
+function clickMoney(e){
+ const x=e.clientX||innerWidth/2,y=e.clientY||innerHeight/2;
+ state.money=Math.min(TARGET,state.money+state.power);state.clicks++;
+ coin.classList.remove("hit");void coin.offsetWidth;coin.classList.add("hit");
+ particle(x,y);burst(x,y);beep(280+Math.min(800,state.power/2),.045,"triangle",.025);
+ if(state.clicks%20===0) beep(720,.08,"sine",.02);
+ checkSecrets();render();save();
+}
+coin.addEventListener("pointerdown",clickMoney);
+
+function buy(i){
+ const u=UPGRADES[i], level=state.owned[i], cost=Math.floor(u.cost*Math.pow(1.34,level));
+ if(state.money<cost){beep(100,.1,"sawtooth",.02);toastMsg("💸 پول کافی نیست");zone.classList.add("shake");setTimeout(()=>zone.classList.remove("shake"),300);return}
+ state.money-=cost;state.power+=u.gain;state.owned[i]++;state.bought++;
+ beep(540+Math.min(500,i*4),.09,"square",.035);burst(innerWidth/2,innerHeight/2);
+ toastMsg("🚀 ارتقا خرید شد: +$"+fmt(u.gain)+" در هر کلیک");
+ checkSecrets();render();save();
+}
+function render(){
+ moneyEl.innerHTML="$"+fmt(state.money)+' <small>/ $1B</small>';
+ const p=Math.min(100,state.money/TARGET*100);bar.style.width=p+"%";pct.textContent=p.toFixed(p<1?2:1)+"%";
+ powerEl.textContent="قدرت کلیک: +$"+fmt(state.power);
+ ownedEl.textContent=state.bought+" / 100";
+ upgradesEl.innerHTML=UPGRADES.map((u,i)=>{
+  const lv=state.owned[i],cost=Math.floor(u.cost*Math.pow(1.34,lv)), can=state.money>=cost;
+  return `<article class="card ${can?"buyable":""} ${lv?"maxed":""}">
+   <div class="cardTop"><div class="ico">${u.icon}</div><div class="lv">LV ${lv}</div></div>
+   <h3>${u.name}</h3><div class="gain">+$${fmt(u.gain)} / کلیک</div>
+   <div class="cost">قیمت: $${fmt(cost)}</div>
+   <button class="buy" ${can?"":"disabled"} onclick="buy(${i})">${lv?"ارتقای دوباره":"خرید"} • $${fmt(cost)}</button>
+  </article>`
+ }).join("");
+}
+function checkSecrets(){
+ // 12 endings remain mysterious until unlocked.
+ const conditions=[
+  state.clicks>=1000,
+  state.money>=1000000,
+  state.bought>=10,
+  state.bought>=30,
+  state.bought>=60,
+  state.power>=1000,
+  state.power>=10000,
+  state.money>=100000000,
+  state.clicks>=10000,
+  state.money>=500000000,
+  state.bought>=100,
+  state.money>=TARGET
+ ];
+ for(let i=0;i<12;i++) if(conditions[i]&&!state.unlocked[i]){state.unlocked[i]=true;toastMsg("🔒 یک راز باز شد...");beep(880,.18,"sine",.04);burst(innerWidth/2,innerHeight/2,true)}
+}
+const secretNames=["فضانورد","میلیاردر","ماه","مریخ","سرمایه‌دار","هوش مصنوعی","امپراتوری فضایی","ناشناخته","شکست؟","زمان","بیگانگان","افسانه‌ای"];
+const secretDesc=["...","...","...","...","...","...","...","...","...","...","...","..."];
+function renderEnds(){
+ endsEl.innerHTML=secretNames.map((n,i)=>state.unlocked[i]
+ ? `<div class="end unlocked"><div class="q">✦</div><b>${n}</b><div style="font-size:11px;color:#7893a6;margin-top:5px">${secretDesc[i]}</div></div>`
+ : `<div class="end"><div class="q">???</div><div style="font-size:10px;color:#476378">قفل شده</div></div>`).join("");
+}
+document.getElementById("endsBtn").onclick=()=>{checkSecrets();renderEnds();modal.classList.add("show");beep(600,.06)}
+document.getElementById("closeModal").onclick=()=>modal.classList.remove("show");
+modal.addEventListener("pointerdown",e=>{if(e.target===modal)modal.classList.remove("show")});
+soundBtn.onclick=()=>{state.sound=!state.sound;soundBtn.textContent=state.sound?"🔊 صدا":"🔇 بی‌صدا";save();if(state.sound)beep(700,.06)}
+document.getElementById("resetBtn").onclick=()=>{
+ if(confirm("همه پیشرفت‌ها پاک شود؟")){localStorage.removeItem("spaceUltraSave");location.reload()}
+}
+document.addEventListener("keydown",e=>{
+ if(e.code==="Space"){e.preventDefault();clickMoney({clientX:innerWidth/2,clientY:innerHeight/2})}
+});
+function makeStars(){
+ const s=document.getElementById("stars");for(let i=0;i<110;i++){let x=document.createElement("i");x.className="star";x.style.left=Math.random()*100+"%";x.style.top=Math.random()*100+"%";x.style.animationDelay=Math.random()*2+"s";x.style.animationDuration=(1+Math.random()*3)+"s";s.appendChild(x)}
+}
+makeStars();render();
+</script>
+</body></html>
